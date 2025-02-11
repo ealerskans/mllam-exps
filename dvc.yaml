@@ -7,7 +7,7 @@ stages:
     - data/datastore.yaml
     outs:
     - data/datastore.zarr
-  create_graph-slurm:
+  create_graph:
     cmd: python -m neural_lam.create_graph --config_path data/config.yaml --name 1level
       --levels 1
     params:
