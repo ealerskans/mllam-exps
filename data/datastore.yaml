@@ -9,7 +9,7 @@ output:
   coord_ranges:
     time:
       start: 1991-01-01T00:00
-      end: 1991-01-10T00:00
+      end: 1991-04-01T00:00
       step: PT3H
   chunking:
     time: 1
@@ -18,16 +18,16 @@ output:
     splits:
       train:
         start: 1991-01-01T00:00
-        end: 1991-01-06T00:00
+        end: 1991-02-01T00:00
         compute_statistics:
           ops: [mean, std, diff_mean, diff_std]
           dims: [grid_index, time]
       val:
-        start: 1991-01-06T00:00
-        end: 1991-01-08T00:00
+        start: 1991-02-01T00:00
+        end: 1991-03-01T00:00
       test:
-        start: 1991-01-08T00:00
-        end: 1991-10-01T00:00
+        start: 1991-03-01T00:00
+        end: 1991-04-01T00:00
 
 inputs:
   
