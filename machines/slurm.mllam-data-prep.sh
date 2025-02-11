@@ -12,4 +12,4 @@ echo "Started slurm job $SLURM_JOB_ID"
 
 source machines/environment.sh
 
-srun -ul python -m mllam_data_prep data/datastore.yaml "$@"
+srun -ul python -m mllam_data_prep "$@"
