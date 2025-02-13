@@ -5,7 +5,6 @@
 #SBATCH --ntasks-per-node=8
 #SBATCH --gres=gpu:8  #per node
 #SBATCH --no-requeue
-#SBATCH --partition=prodq
 #SBATCH --exclusive
 #SBATCH --account=cu_0003
 #SBATCH --output=/dcai/projects01/cu_0003/user_space/ea/logs/neural-lam/%x_%j.log
