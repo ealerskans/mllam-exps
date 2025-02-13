@@ -12,4 +12,7 @@ echo "Started slurm job $SLURM_JOB_ID"
 
 source machines/environment.sh
 
+# Export for stability
+export OMPI_MCA_coll_hcoll_enable=0
+
 srun -ul python -m mllam_data_prep "$@"
