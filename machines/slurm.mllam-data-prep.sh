@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --job-name=EA-mllam-data-prep
+#SBATCH --job-name=mllam-data-prep
 #SBATCH --time=1:00:00
 #SBATCH --ntasks=1
 #SBATCH --gpus=1

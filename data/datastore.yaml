@@ -1,5 +1,5 @@
 schema_version: v0.6.0
-dataset_version: v0.1.0
+dataset_version: v1.0.0
 
 output:
   variables:
@@ -37,19 +37,87 @@ inputs:
       - t2m
       - u10m
       - v10m
+      - r2m
     dim_mapping:
       time:
         method: rename
         dim: time
-      state_feature:
-        method: stack_variables_by_var_name
-        name_format: "{var_name}"
       grid_index:
         method: stack
         dims: [x, y]
+      state_feature:
+        method: stack_variables_by_var_name
+        name_format: "{var_name}"
+    target_output_variable: state
+  
+  danra_pressure_levels_z:
+    path: /dcai/projects/cu_0003/data/sources/danra/v0.5.0/pressure_levels.zarr
+    dims: [pressure, time, x, y]
+    variables:
+      z:
+        pressure:
+          values: [500,]
+          units: hPa
+    dim_mapping:
+      time:
+        method: rename
+        dim: time
+      grid_index:
+        method: stack
+        dims: [x, y]
+      state_feature:
+        method: stack_variables_by_var_name
+        dims: [pressure]
+        name_format: "{var_name}{pressure}hPa"
+    target_output_variable: state
+  
+  danra_pressure_levels_r:
+    path: /dcai/projects/cu_0003/data/sources/danra/v0.5.0/pressure_levels.zarr
+    dims: [pressure, time, x, y]
+    variables:
+      r:
+        pressure:
+          values: [700,]
+          units: hPa
+    dim_mapping:
+      time:
+        method: rename
+        dim: time
+      grid_index:
+        method: stack
+        dims: [x, y]
+      state_feature:
+        method: stack_variables_by_var_name
+        dims: [pressure]
+        name_format: "{var_name}{pressure}hPa"
     target_output_variable: state
 
-  danra_static:
+  danra_pressure_levels_windvector:
+    path: /dcai/projects/cu_0003/data/sources/danra/v0.5.0/pressure_levels.zarr
+    dims: [pressure, time, x, y]
+    variables:
+      u:
+        pressure:
+          values: [850,]
+          units: hPa
+      v:
+        pressure:
+          values: [850,]
+          units: hPa
+    dim_mapping:
+      time:
+        method: rename
+        dim: time
+      grid_index:
+        method: stack
+        dims: [x, y]
+      state_feature:
+        method: stack_variables_by_var_name
+        dims: [pressure]
+        name_format: "{var_name}{pressure}hPa"
+    target_output_variable: state
+
+  danra_lsm:
     path: /dcai/projects/cu_0003/data/sources/danra/v0.5.0/single_levels.zarr
     dims: [x, y]
     variables:
@@ -73,3 +141,11 @@ extra:
       globe:
         semimajor_axis: 6367470.0
         semiminor_axis: 6367470.0
+  global_attributes:
+     title: Baseline A
+     comment: >
+      This is our first baseline experiment setup. It was created to be 
+      reasonably fast for training, give reasonable model skill (for the 
+      first roll-out step) and leave GPU RAM space (with the 80GB cards 
+      we are using) to allow for experimentation in terms of adding 
+      variables, levels, increasing size of hidden dimension, etc.
